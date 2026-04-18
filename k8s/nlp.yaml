@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nlp
+  namespace: realtime-asr
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nlp
+  template:
+    metadata:
+      labels:
+        app: nlp
+    spec:
+      containers:
+        - name: nlp
+          image: realtime-asr-nlp:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - uvicorn backend.app.nlp_service:app --host 0.0.0.0 --port ${NLP_PORT} --workers ${NLP_WEB_CONCURRENCY}
+          envFrom:
+            - configMapRef:
+                name: realtime-asr-config
+          ports:
+            - containerPort: 8766
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "3000m"
+              memory: "6Gi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8766
+            initialDelaySeconds: 25
+            periodSeconds: 10
+            failureThreshold: 6
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8766
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            failureThreshold: 40
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nlp
+  namespace: realtime-asr
+spec:
+  selector:
+    app: nlp
+  ports:
+    - name: http
+      port: 8766
+      targetPort: 8766
+  type: ClusterIP

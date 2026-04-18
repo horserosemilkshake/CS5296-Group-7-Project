@@ -1,0 +1,799 @@
+{
+  "started_at": "2026-03-22T05:57:13.561677+00:00",
+  "config": {
+    "base_url": "https://192.168.1.11",
+    "ws_base_url": "wss://192.168.1.11",
+    "scenarios": [
+      "summarize",
+      "rewrite",
+      "mixed-all"
+    ],
+    "concurrency": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "requests_per_scenario": 60,
+    "timeout_sec": 120.0,
+    "monitor_mode": "auto",
+    "k8s_namespace": "realtime-tts",
+    "sample_interval_sec": 1.0,
+    "ws_sample_rate": 48000,
+    "ws_chunks": 24,
+    "ws_chunk_bytes": 3200,
+    "ws_chunk_delay_ms": 8.0,
+    "audio_source": "audio/cat.wav",
+    "chunk_merge_threshold": null,
+    "nlp_semaphore": 8
+  },
+  "results": [
+    {
+      "scenario": "summarize",
+      "concurrency": 1,
+      "requests": 60,
+      "duration_sec": 425.108,
+      "throughput_rps": 0.14,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 60
+      },
+      "endpoint_counts": {
+        "/api/summarize": 60
+      },
+      "latency_ms": {
+        "avg": 7085.12,
+        "p50": 6720.04,
+        "p95": 9613.31,
+        "p99": 12126.86,
+        "max": 12622.18
+      },
+      "queue_wait_ms": {
+        "avg": 213379.18,
+        "p95": 397775.94,
+        "max": 418389.56
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "summarize",
+      "concurrency": 2,
+      "requests": 60,
+      "duration_sec": 411.695,
+      "throughput_rps": 0.15,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 60
+      },
+      "endpoint_counts": {
+        "/api/summarize": 60
+      },
+      "latency_ms": {
+        "avg": 13638.53,
+        "p50": 13359.64,
+        "p95": 19499.63,
+        "p99": 22976.63,
+        "max": 24085.05
+      },
+      "queue_wait_ms": {
+        "avg": 193012.59,
+        "p95": 380102.32,
+        "max": 400498.1
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "summarize",
+      "concurrency": 4,
+      "requests": 60,
+      "duration_sec": 405.967,
+      "throughput_rps": 0.15,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 60
+      },
+      "endpoint_counts": {
+        "/api/summarize": 60
+      },
+      "latency_ms": {
+        "avg": 26355.42,
+        "p50": 27554.17,
+        "p95": 42032.14,
+        "p99": 43754.88,
+        "max": 44808.48
+      },
+      "queue_wait_ms": {
+        "avg": 173179.96,
+        "p95": 354178.37,
+        "max": 378906.7
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "summarize",
+      "concurrency": 8,
+      "requests": 60,
+      "duration_sec": 385.339,
+      "throughput_rps": 0.16,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 60
+      },
+      "endpoint_counts": {
+        "/api/summarize": 60
+      },
+      "latency_ms": {
+        "avg": 48246.19,
+        "p50": 49327.01,
+        "p95": 80008.13,
+        "p99": 93710.13,
+        "max": 94292.63
+      },
+      "queue_wait_ms": {
+        "avg": 145104.7,
+        "p95": 312277.12,
+        "max": 329225.96
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "summarize",
+      "concurrency": 16,
+      "requests": 60,
+      "duration_sec": 389.387,
+      "throughput_rps": 0.15,
+      "success": 50,
+      "failed": 10,
+      "timeouts": 0,
+      "overload_errors": 10,
+      "status_counts": {
+        "200": 50,
+        "502": 10
+      },
+      "endpoint_counts": {
+        "/api/summarize": 60
+      },
+      "latency_ms": {
+        "avg": 91586.48,
+        "p50": 99295.6,
+        "p95": 120007.39,
+        "p99": 120007.99,
+        "max": 120008.11
+      },
+      "queue_wait_ms": {
+        "avg": 109088.95,
+        "p95": 269598.6,
+        "max": 292407.39
+      },
+      "backpressure_index": 41.67,
+      "sample_errors": [
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway"
+      ],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "summarize",
+      "concurrency": 32,
+      "requests": 60,
+      "duration_sec": 240.029,
+      "throughput_rps": 0.25,
+      "success": 18,
+      "failed": 42,
+      "timeouts": 1,
+      "overload_errors": 42,
+      "status_counts": {
+        "200": 18,
+        "502": 41,
+        "0": 1
+      },
+      "endpoint_counts": {
+        "/api/summarize": 60
+      },
+      "latency_ms": {
+        "avg": 102401.93,
+        "p50": 120006.11,
+        "p95": 120009.94,
+        "p99": 120010.42,
+        "max": 120010.51
+      },
+      "queue_wait_ms": {
+        "avg": 38404.71,
+        "p95": 120019.61,
+        "max": 120021.31
+      },
+      "backpressure_index": 79.0,
+      "sample_errors": [
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway"
+      ],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "rewrite",
+      "concurrency": 1,
+      "requests": 60,
+      "duration_sec": 285.993,
+      "throughput_rps": 0.21,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 60
+      },
+      "endpoint_counts": {
+        "/api/rewrite": 60
+      },
+      "latency_ms": {
+        "avg": 4766.53,
+        "p50": 1913.6,
+        "p95": 5811.99,
+        "p99": 74392.5,
+        "max": 85892.7
+      },
+      "queue_wait_ms": {
+        "avg": 218863.0,
+        "p95": 277845.16,
+        "max": 284464.69
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "rewrite",
+      "concurrency": 2,
+      "requests": 60,
+      "duration_sec": 116.802,
+      "throughput_rps": 0.51,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 60
+      },
+      "endpoint_counts": {
+        "/api/rewrite": 60
+      },
+      "latency_ms": {
+        "avg": 3861.58,
+        "p50": 3596.48,
+        "p95": 5627.64,
+        "p99": 6880.06,
+        "max": 7104.21
+      },
+      "queue_wait_ms": {
+        "avg": 55732.66,
+        "p95": 108615.14,
+        "max": 113451.07
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "rewrite",
+      "concurrency": 4,
+      "requests": 60,
+      "duration_sec": 130.998,
+      "throughput_rps": 0.46,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 60
+      },
+      "endpoint_counts": {
+        "/api/rewrite": 60
+      },
+      "latency_ms": {
+        "avg": 8547.28,
+        "p50": 8208.77,
+        "p95": 15249.7,
+        "p99": 20392.49,
+        "max": 21318.11
+      },
+      "queue_wait_ms": {
+        "avg": 55471.1,
+        "p95": 111329.63,
+        "max": 120692.71
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "rewrite",
+      "concurrency": 8,
+      "requests": 60,
+      "duration_sec": 119.357,
+      "throughput_rps": 0.5,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 60
+      },
+      "endpoint_counts": {
+        "/api/rewrite": 60
+      },
+      "latency_ms": {
+        "avg": 14930.8,
+        "p50": 15495.38,
+        "p95": 26097.52,
+        "p99": 26867.52,
+        "max": 27326.74
+      },
+      "queue_wait_ms": {
+        "avg": 46582.29,
+        "p95": 98082.65,
+        "max": 102573.65
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "rewrite",
+      "concurrency": 16,
+      "requests": 60,
+      "duration_sec": 119.253,
+      "throughput_rps": 0.5,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 60
+      },
+      "endpoint_counts": {
+        "/api/rewrite": 60
+      },
+      "latency_ms": {
+        "avg": 28532.05,
+        "p50": 30973.49,
+        "p95": 38094.95,
+        "p99": 39430.19,
+        "max": 40205.74
+      },
+      "queue_wait_ms": {
+        "avg": 33414.54,
+        "p95": 84077.73,
+        "max": 90121.19
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "rewrite",
+      "concurrency": 32,
+      "requests": 60,
+      "duration_sec": 124.462,
+      "throughput_rps": 0.48,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 60
+      },
+      "endpoint_counts": {
+        "/api/rewrite": 60
+      },
+      "latency_ms": {
+        "avg": 49769.28,
+        "p50": 58353.03,
+        "p95": 77275.49,
+        "p99": 79201.31,
+        "max": 79630.13
+      },
+      "queue_wait_ms": {
+        "avg": 13747.9,
+        "p95": 50940.67,
+        "max": 57391.82
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 0,
+        "total_chunks_original": 0,
+        "total_chunks_sent": 0,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "mixed-all",
+      "concurrency": 1,
+      "requests": 60,
+      "duration_sec": 523.035,
+      "throughput_rps": 0.11,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 38,
+        "101": 22
+      },
+      "endpoint_counts": {
+        "/api/summarize": 15,
+        "/ws/transcribe": 22,
+        "/api/rewrite": 23
+      },
+      "latency_ms": {
+        "avg": 8717.23,
+        "p50": 7067.09,
+        "p95": 16478.22,
+        "p99": 16498.87,
+        "max": 16514.45
+      },
+      "queue_wait_ms": {
+        "avg": 249758.1,
+        "p95": 482034.09,
+        "max": 506568.74
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 22,
+        "total_chunks_original": 42284,
+        "total_chunks_sent": 42284,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "mixed-all",
+      "concurrency": 2,
+      "requests": 60,
+      "duration_sec": 292.099,
+      "throughput_rps": 0.21,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 42,
+        "101": 18
+      },
+      "endpoint_counts": {
+        "/api/rewrite": 18,
+        "/api/summarize": 24,
+        "/ws/transcribe": 18
+      },
+      "latency_ms": {
+        "avg": 9643.16,
+        "p50": 8636.05,
+        "p95": 16878.89,
+        "p99": 16899.71,
+        "max": 16903.78
+      },
+      "queue_wait_ms": {
+        "avg": 140394.19,
+        "p95": 269391.75,
+        "max": 284287.73
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 18,
+        "total_chunks_original": 34596,
+        "total_chunks_sent": 34596,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "mixed-all",
+      "concurrency": 4,
+      "requests": 60,
+      "duration_sec": 223.948,
+      "throughput_rps": 0.27,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 43,
+        "101": 17
+      },
+      "endpoint_counts": {
+        "/api/rewrite": 16,
+        "/api/summarize": 27,
+        "/ws/transcribe": 17
+      },
+      "latency_ms": {
+        "avg": 14440.37,
+        "p50": 16675.14,
+        "p95": 22374.47,
+        "p99": 27708.49,
+        "max": 31286.13
+      },
+      "queue_wait_ms": {
+        "avg": 92178.54,
+        "p95": 192451.88,
+        "max": 206780.31
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 17,
+        "total_chunks_original": 32674,
+        "total_chunks_sent": 32674,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "mixed-all",
+      "concurrency": 8,
+      "requests": 60,
+      "duration_sec": 184.733,
+      "throughput_rps": 0.32,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 39,
+        "101": 21
+      },
+      "endpoint_counts": {
+        "/api/rewrite": 20,
+        "/api/summarize": 19,
+        "/ws/transcribe": 21
+      },
+      "latency_ms": {
+        "avg": 22689.91,
+        "p50": 16939.43,
+        "p95": 50975.05,
+        "p99": 54591.7,
+        "max": 56615.48
+      },
+      "queue_wait_ms": {
+        "avg": 71993.14,
+        "p95": 146347.53,
+        "max": 152196.25
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 21,
+        "total_chunks_original": 40362,
+        "total_chunks_sent": 40362,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "mixed-all",
+      "concurrency": 16,
+      "requests": 60,
+      "duration_sec": 189.265,
+      "throughput_rps": 0.32,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "200": 42,
+        "101": 18
+      },
+      "endpoint_counts": {
+        "/api/rewrite": 22,
+        "/api/summarize": 20,
+        "/ws/transcribe": 18
+      },
+      "latency_ms": {
+        "avg": 42054.88,
+        "p50": 43658.35,
+        "p95": 80598.45,
+        "p99": 85250.86,
+        "max": 87599.53
+      },
+      "queue_wait_ms": {
+        "avg": 44073.1,
+        "p95": 118469.68,
+        "max": 128818.6
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 18,
+        "total_chunks_original": 34596,
+        "total_chunks_sent": 34596,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    },
+    {
+      "scenario": "mixed-all",
+      "concurrency": 32,
+      "requests": 60,
+      "duration_sec": 162.373,
+      "throughput_rps": 0.37,
+      "success": 54,
+      "failed": 6,
+      "timeouts": 0,
+      "overload_errors": 6,
+      "status_counts": {
+        "200": 31,
+        "101": 23,
+        "502": 6
+      },
+      "endpoint_counts": {
+        "/api/summarize": 19,
+        "/ws/transcribe": 23,
+        "/api/rewrite": 18
+      },
+      "latency_ms": {
+        "avg": 53752.52,
+        "p50": 33353.97,
+        "p95": 120008.58,
+        "p99": 120018.81,
+        "max": 120028.9
+      },
+      "queue_wait_ms": {
+        "avg": 11152.05,
+        "p95": 34355.82,
+        "max": 42360.8
+      },
+      "backpressure_index": 37.0,
+      "sample_errors": [
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway",
+        "HTTPError: Bad Gateway"
+      ],
+      "chunk_merge": {
+        "enabled": false,
+        "threshold_rms": null,
+        "sessions": 23,
+        "total_chunks_original": 44206,
+        "total_chunks_sent": 44206,
+        "compression_ratio": 1.0,
+        "reduction_pct": 0.0
+      }
+    }
+  ],
+  "resources": {
+    "mode": "none",
+    "services": {}
+  },
+  "ended_at": "2026-03-22T07:16:04.462682+00:00"
+}

@@ -1,0 +1,29 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: realtime-asr-app
+    ports:
+      - "${HOST_PORT:-8765}:${APP_PORT:-8765}"
+    environment:
+      - LLM_API_MODE=ollama
+      - LLM_API_BASE=http://host.docker.internal:11434
+      - LLM_MODEL=llama3.2
+      - APP_PORT=${APP_PORT:-8765}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # Optional local LLM service; run with: docker compose --profile llm up
+  ollama:
+    image: ollama/ollama:latest
+    container_name: realtime-asr-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    profiles:
+      - llm
+
+volumes:
+  ollama-data:

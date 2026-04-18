@@ -1,0 +1,41 @@
+# Nginx Ingress for HTTPS TLS termination in front of the gateway service.
+# Applied by scripts/setup_https.sh — not included in kustomization.yaml by default.
+# Required env vars when applying:
+#   DOMAIN  — public hostname (e.g. tts.example.com)
+#   TLS_SECRET_NAME — name of the TLS secret in the realtime-asr namespace
+#                     ("realtime-asr-tls" for self-signed, or managed by cert-manager)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  namespace: realtime-asr
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+    # Disable automatic HTTP→HTTPS redirect to prevent redirect loops on IP-based access.
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - DOMAIN_PLACEHOLDER
+      secretName: TLS_SECRET_PLACEHOLDER
+  rules:
+    - host: DOMAIN_PLACEHOLDER
+      http:
+        paths:
+          - path: /grafana
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  number: 80

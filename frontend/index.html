@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Realtime Vosk Speech App</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="bg-shape bg-shape-a"></div>
+  <div class="bg-shape bg-shape-b"></div>
+
+  <main class="container">
+    <header class="hero">
+      <p class="eyebrow">Realtime Speech to Text</p>
+      <h1>Speak naturally.<br />Read your words live.</h1>
+      <p class="subtext">
+        Click start, speak into your microphone, and watch Vosk transcribe in real time.
+      </p>
+    </header>
+
+    <section class="panel">
+      <div class="controls">
+        <button id="startStopBtn" class="btn-primary">Start Listening</button>
+        <button id="downloadTranscriptBtn" class="btn-secondary">Download Transcript</button>
+        <span id="statusPill" class="status idle">Idle</span>
+      </div>
+
+      <div class="transcript-box">
+        <h2>Live Transcript</h2>
+        <p id="transcriptText" class="transcript">Your transcript will appear here...</p>
+      </div>
+    </section>
+
+    <section id="summarySection" class="panel hidden">
+      <div class="summary-header">
+        <h2>Summarize Transcript</h2>
+        <div class="summary-actions">
+          <button id="summarizeBtn" class="btn-secondary">Summarize</button>
+          <button id="downloadSummaryBtn" class="btn-secondary">Download Summary</button>
+        </div>
+      </div>
+      <p id="summaryText" class="summary">Summary appears here after processing.</p>
+
+      <div class="rewrite-header">
+        <h2>Rewrite Transcript</h2>
+      </div>
+      <div class="rewrite-controls">
+        <select id="rewritePresetSelect" class="preset-select">
+          <option value="Rewrite this transcript to be concise and clear." selected>concise</option>
+          <option value="Rewrite this transcript in a professional tone suitable for stakeholders.">professional</option>
+          <option value="Rewrite this transcript as a polished follow-up email body.">email-ready</option>
+        </select>
+        <button id="rewriteBtn" class="btn-secondary">Rewrite</button>
+      </div>
+      <p id="rewriteStatus" class="summary">Rewritten transcript will replace the live transcript text.</p>
+      <p id="rewriteDebug" class="debug-line">Debug: idle</p>
+    </section>
+  </main>
+
+  <script src="/static/app.js?v=20260318-k8sfix1"></script>
+</body>
+</html>

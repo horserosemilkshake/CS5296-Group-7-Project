@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ollama-model-init
+  namespace: realtime-asr
+spec:
+  backoffLimit: 3
+  template:
+    metadata:
+      labels:
+        app: ollama-model-init
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: pull-model
+          image: ollama/ollama:latest
+          env:
+            - name: OLLAMA_HOST
+              value: http://ollama:11434
+            - name: LLM_MODEL
+              valueFrom:
+                configMapKeyRef:
+                  name: realtime-asr-config
+                  key: LLM_MODEL
+          command:
+            - /bin/sh
+            - -c
+            - |
+              until ollama list >/dev/null 2>&1; do
+                echo "Waiting for Ollama..."
+                sleep 3
+              done
+              ollama pull "$LLM_MODEL"

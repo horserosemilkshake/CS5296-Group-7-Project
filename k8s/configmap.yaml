@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: realtime-asr-config
+  namespace: realtime-asr
+data:
+  APP_PORT: "8765"
+  NLP_PORT: "8766"
+  WEB_CONCURRENCY: "1"
+  NLP_WEB_CONCURRENCY: "1"
+  MAX_AUDIO_QUEUE_SIZE: "32"
+  # Set to "true" to enable server-side silence merging (see SILENCE_RMS_THRESHOLD).
+  CHUNK_MERGE_ENABLED: "false"
+  SILENCE_RMS_THRESHOLD: "200"
+  SUMMARIZE_MAX_CONCURRENCY: "1"
+  VOSK_MODEL_PATH: "/app/models/vosk-model-en-us-0.22"
+  VOSK_MODEL_URL: "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip"
+  LLM_API_MODE: "ollama"
+  LLM_MODEL: "llama3.2:1b"
+  NLP_API_BASE: "http://nlp:8766"
+  LLM_API_BASE: "http://ollama:11434"

@@ -1,0 +1,6 @@
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+vosk==0.3.45
+httpx==0.28.1
+prometheus-fastapi-instrumentator==7.1.0
+aiokafka==0.12.0

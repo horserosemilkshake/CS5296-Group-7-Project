@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: realtime-asr
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - ollama.yaml
+  - ollama-init-job.yaml
+  - nlp.yaml
+  - gateway.yaml
+  - hpa.yaml
+  - monitoring.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: prometheus-config
+    files:
+      - monitoring/prometheus/prometheus.yml
+  - name: grafana-datasource-config
+    files:
+      - monitoring/grafana/provisioning/datasources/prometheus.yml
+  - name: grafana-dashboard-provider-config
+    files:
+      - monitoring/grafana/provisioning/dashboards/dashboard-provider.yml
+  - name: grafana-dashboard-json
+    files:
+      - monitoring/grafana/dashboards/realtime-asr-overview.json

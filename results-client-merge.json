@@ -1,0 +1,290 @@
+{
+  "started_at": "2026-03-21T17:26:12.335524+00:00",
+  "config": {
+    "base_url": "https://192.168.1.11",
+    "ws_base_url": "wss://192.168.1.11",
+    "scenarios": [
+      "transcribe"
+    ],
+    "concurrency": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "requests_per_scenario": 60,
+    "timeout_sec": 120.0,
+    "monitor_mode": "auto",
+    "k8s_namespace": "realtime-asr",
+    "sample_interval_sec": 1.0,
+    "ws_sample_rate": 48000,
+    "ws_chunks": 24,
+    "ws_chunk_bytes": 3200,
+    "ws_chunk_delay_ms": 8.0,
+    "audio_source": "audio/cat.wav",
+    "chunk_merge_threshold": 200
+  },
+  "results": [
+    {
+      "scenario": "transcribe",
+      "concurrency": 1,
+      "requests": 60,
+      "duration_sec": 796.88,
+      "throughput_rps": 0.08,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "101": 60
+      },
+      "endpoint_counts": {
+        "/ws/transcribe": 60
+      },
+      "latency_ms": {
+        "avg": 13281.31,
+        "p50": 13280.36,
+        "p95": 13320.51,
+        "p99": 13341.69,
+        "max": 13349.14
+      },
+      "queue_wait_ms": {
+        "avg": 391860.48,
+        "p95": 744464.41,
+        "max": 783598.56
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": true,
+        "threshold_rms": 200,
+        "sessions": 60,
+        "total_chunks_original": 115320,
+        "total_chunks_sent": 92580,
+        "compression_ratio": 0.803,
+        "reduction_pct": 19.7
+      }
+    },
+    {
+      "scenario": "transcribe",
+      "concurrency": 2,
+      "requests": 60,
+      "duration_sec": 399.648,
+      "throughput_rps": 0.15,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "101": 60
+      },
+      "endpoint_counts": {
+        "/ws/transcribe": 60
+      },
+      "latency_ms": {
+        "avg": 13320.1,
+        "p50": 13315.65,
+        "p95": 13358.65,
+        "p99": 13384.01,
+        "max": 13390.85
+      },
+      "queue_wait_ms": {
+        "avg": 193112.59,
+        "p95": 372949.74,
+        "max": 386325.69
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": true,
+        "threshold_rms": 200,
+        "sessions": 60,
+        "total_chunks_original": 115320,
+        "total_chunks_sent": 92580,
+        "compression_ratio": 0.803,
+        "reduction_pct": 19.7
+      }
+    },
+    {
+      "scenario": "transcribe",
+      "concurrency": 4,
+      "requests": 60,
+      "duration_sec": 201.186,
+      "throughput_rps": 0.3,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "101": 60
+      },
+      "endpoint_counts": {
+        "/ws/transcribe": 60
+      },
+      "latency_ms": {
+        "avg": 13405.05,
+        "p50": 13400.18,
+        "p95": 13453.77,
+        "p99": 13456.98,
+        "max": 13457.01
+      },
+      "queue_wait_ms": {
+        "avg": 93831.93,
+        "p95": 187588.25,
+        "max": 187805.83
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": true,
+        "threshold_rms": 200,
+        "sessions": 60,
+        "total_chunks_original": 115320,
+        "total_chunks_sent": 92580,
+        "compression_ratio": 0.803,
+        "reduction_pct": 19.7
+      }
+    },
+    {
+      "scenario": "transcribe",
+      "concurrency": 8,
+      "requests": 60,
+      "duration_sec": 108.69,
+      "throughput_rps": 0.55,
+      "success": 60,
+      "failed": 0,
+      "timeouts": 0,
+      "overload_errors": 0,
+      "status_counts": {
+        "101": 60
+      },
+      "endpoint_counts": {
+        "/ws/transcribe": 60
+      },
+      "latency_ms": {
+        "avg": 13592.92,
+        "p50": 13603.73,
+        "p95": 13664.6,
+        "p99": 13733.49,
+        "max": 13756.01
+      },
+      "queue_wait_ms": {
+        "avg": 44430.97,
+        "p95": 94940.88,
+        "max": 95255.14
+      },
+      "backpressure_index": 30.0,
+      "sample_errors": [],
+      "chunk_merge": {
+        "enabled": true,
+        "threshold_rms": 200,
+        "sessions": 60,
+        "total_chunks_original": 115320,
+        "total_chunks_sent": 92580,
+        "compression_ratio": 0.803,
+        "reduction_pct": 19.7
+      }
+    },
+    {
+      "scenario": "transcribe",
+      "concurrency": 16,
+      "requests": 60,
+      "duration_sec": 57.738,
+      "throughput_rps": 1.04,
+      "success": 53,
+      "failed": 7,
+      "timeouts": 7,
+      "overload_errors": 7,
+      "status_counts": {
+        "101": 53,
+        "0": 7
+      },
+      "endpoint_counts": {
+        "/ws/transcribe": 60
+      },
+      "latency_ms": {
+        "avg": 14244.17,
+        "p50": 13817.24,
+        "p95": 18882.67,
+        "p99": 19358.16,
+        "max": 19536.82
+      },
+      "queue_wait_ms": {
+        "avg": 19787.74,
+        "p95": 41799.65,
+        "max": 44105.14
+      },
+      "backpressure_index": 38.17,
+      "sample_errors": [
+        "no close frame received or sent",
+        "no close frame received or sent",
+        "no close frame received or sent",
+        "no close frame received or sent",
+        "no close frame received or sent"
+      ],
+      "chunk_merge": {
+        "enabled": true,
+        "threshold_rms": 200,
+        "sessions": 60,
+        "total_chunks_original": 115320,
+        "total_chunks_sent": 92580,
+        "compression_ratio": 0.803,
+        "reduction_pct": 19.7
+      }
+    },
+    {
+      "scenario": "transcribe",
+      "concurrency": 32,
+      "requests": 60,
+      "duration_sec": 42.451,
+      "throughput_rps": 1.41,
+      "success": 21,
+      "failed": 39,
+      "timeouts": 39,
+      "overload_errors": 39,
+      "status_counts": {
+        "101": 21,
+        "0": 39
+      },
+      "endpoint_counts": {
+        "/ws/transcribe": 60
+      },
+      "latency_ms": {
+        "avg": 17885.58,
+        "p50": 14448.89,
+        "p95": 30615.91,
+        "p99": 30640.22,
+        "max": 30658.59
+      },
+      "queue_wait_ms": {
+        "avg": 9391.07,
+        "p95": 28051.82,
+        "max": 28782.81
+      },
+      "backpressure_index": 75.5,
+      "sample_errors": [
+        "no close frame received or sent",
+        "no close frame received or sent",
+        "no close frame received or sent",
+        "no close frame received or sent",
+        "no close frame received or sent"
+      ],
+      "chunk_merge": {
+        "enabled": true,
+        "threshold_rms": 200,
+        "sessions": 60,
+        "total_chunks_original": 115320,
+        "total_chunks_sent": 92580,
+        "compression_ratio": 0.803,
+        "reduction_pct": 19.7
+      }
+    }
+  ],
+  "resources": {
+    "mode": "none",
+    "services": {}
+  },
+  "ended_at": "2026-03-21T17:52:59.849585+00:00"
+}

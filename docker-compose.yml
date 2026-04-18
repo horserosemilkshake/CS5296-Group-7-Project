@@ -1,0 +1,173 @@
+services:
+  kafka:
+    image: redpandadata/redpanda:v24.2.10
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --node-id=0
+      - --check=false
+      - --kafka-addr=PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr=PLAINTEXT://kafka:9092
+    ports:
+      - "9092:9092"
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    depends_on:
+      gateway:
+        condition: service_started
+      nlp:
+        condition: service_started
+      cadvisor:
+        condition: service_started
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.2.2
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./monitoring/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      prometheus:
+        condition: service_started
+    restart: unless-stopped
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    ports:
+      - "8081:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+    devices:
+      - /dev/kmsg
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "${HOST_PORT:-8765}:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      gateway:
+        condition: service_started
+    restart: unless-stopped
+
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "${APP_PORT:-8765}"
+    environment:
+      - APP_PORT=${APP_PORT:-8765}
+      - WEB_CONCURRENCY=${WEB_CONCURRENCY:-2}
+      - MAX_AUDIO_QUEUE_SIZE=${MAX_AUDIO_QUEUE_SIZE:-32}
+      - NLP_API_BASE=http://nlp:${NLP_PORT:-8766}
+      - NLP_ASYNC_ENABLED=true
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - NLP_JOB_REQUEST_TOPIC=nlp.jobs.request
+      - NLP_JOB_RESULT_TOPIC=nlp.jobs.result
+    command: >
+      sh -c "uvicorn backend.app.main:app --host 0.0.0.0 --port $${APP_PORT} --workers $${WEB_CONCURRENCY}"
+    depends_on:
+      kafka:
+        condition: service_started
+      nlp:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:$${APP_PORT}/ >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  nlp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: realtime-asr-nlp
+    environment:
+      - APP_PORT=${NLP_PORT:-8766}
+      - WEB_CONCURRENCY=${NLP_WEB_CONCURRENCY:-1}
+      - LLM_API_MODE=ollama
+      - LLM_API_BASE=http://ollama:11434
+      - LLM_MODEL=${LLM_MODEL:-llama3.2}
+      - SUMMARIZE_MAX_CONCURRENCY=${SUMMARIZE_MAX_CONCURRENCY:-2}
+      - NLP_ASYNC_ENABLED=true
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - NLP_JOB_REQUEST_TOPIC=nlp.jobs.request
+      - NLP_JOB_RESULT_TOPIC=nlp.jobs.result
+    command: >
+      sh -c "uvicorn backend.app.nlp_service:app --host 0.0.0.0 --port $${APP_PORT} --workers $${WEB_CONCURRENCY}"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:$${APP_PORT}/ready >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    depends_on:
+      kafka:
+        condition: service_started
+      ollama:
+        condition: service_healthy
+      ollama-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+  
+  ollama:
+    image: ollama/ollama:latest
+    container_name: realtime-asr-ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - LLM_MODEL=${LLM_MODEL:-llama3.2}
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: unless-stopped
+
+  ollama-init:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    command: pull ${LLM_MODEL:-llama3.2}
+    restart: "no"
+
+volumes:
+  ollama-data:
+  prometheus-data:
+  grafana-data:
