@@ -225,6 +225,42 @@ Notes:
 - Default model storage uses the cluster default StorageClass via PVC `ollama-data`.
 - Manifests are located in `k8s/` and applied via `k8s/kustomization.yaml`.
 
+### Multi-Node Simulation and Placement Validation
+
+Use `scripts/simulate_multinode.sh` to validate pod placement and multi-node behavior before production rollout.
+
+Role of this script:
+- Creates a 2-node `kind` cluster for local simulation, or uses your current cluster context.
+- Applies `k8s/` manifests and patches workload placement using node labels/selectors.
+- Helps compare load balancing and concurrency behavior in a topology closer to real multi-node deployment.
+
+Modes:
+- `CLUSTER_MODE=kind` (default): create/use local `kind` cluster `realtime-asr-multi`.
+- `CLUSTER_MODE=existing`: use current `kubectl` context (for ECS/k3s/existing clusters).
+- `CLUSTER_MODE=auto`: use `kind` if available, otherwise existing context.
+
+Common commands:
+
+```bash
+# Local multi-node simulation with kind
+bash scripts/simulate_multinode.sh up
+bash scripts/simulate_multinode.sh status
+bash scripts/simulate_multinode.sh down
+
+# Run against an existing cluster context (for example ECS)
+CLUSTER_MODE=existing bash scripts/simulate_multinode.sh up
+CLUSTER_MODE=existing bash scripts/simulate_multinode.sh status
+```
+
+Recommended deployment workflow:
+1. Build images and validate behavior with local multi-node simulation.
+2. Deploy to ECS with `bash scripts/deploy.sh`.
+3. Optionally run `CLUSTER_MODE=existing bash scripts/simulate_multinode.sh up` to apply the same placement-style patches on ECS for validation.
+4. Configure HTTPS with `bash scripts/setup_https.sh`.
+
+Important:
+- This script increases confidence in load balancing and placement tests, but `kind` still runs on one machine and is not a full substitute for real multi-VM ECS network conditions.
+
 ## Use a Different Port
 
 Yes. `0.0.0.0` is the bind address (all interfaces), while `8765` is the default port in this project.
