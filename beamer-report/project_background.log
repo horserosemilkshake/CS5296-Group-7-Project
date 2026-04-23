@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.18)  19 APR 2026 07:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.18)  20 APR 2026 18:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -854,28 +854,36 @@ Package pdftex.def Info: figures/image1.png  used on input line 45.
  <./figures/image1.png>] [3
 
 ]
-<figures/image2.png, id=48, 1308.8097pt x 297.0297pt>
-File: figures/image2.png Graphic file (type png)
-<use figures/image2.png>
-Package pdftex.def Info: figures/image2.png  used on input line 92.
-(pdftex.def)             Requested size: 312.00822pt x 70.80815pt.
+<figures/asr word error rate.png, id=48, 1003.75pt x 401.5pt>
+File: figures/asr word error rate.png Graphic file (type png)
+<use figures/asr word error rate.png>
+Package pdftex.def Info: figures/asr word error rate.png  used on input line 82
+.
+(pdftex.def)             Requested size: 268.67117pt x 107.4691pt.
  [4
 
+ <./figures/asr word error rate.png>]
+<figures/image2.png, id=58, 1308.8097pt x 297.0297pt>
+File: figures/image2.png Graphic file (type png)
+<use figures/image2.png>
+Package pdftex.def Info: figures/image2.png  used on input line 105.
+(pdftex.def)             Requested size: 312.00822pt x 70.80815pt.
+ [5
+
  <./figures/image2.png>]
-<figures/image3.png, id=60, 1308.8097pt x 297.0297pt>
+<figures/image3.png, id=70, 1308.8097pt x 297.0297pt>
 File: figures/image3.png Graphic file (type png)
 <use figures/image3.png>
-Package pdftex.def Info: figures/image3.png  used on input line 114.
+Package pdftex.def Info: figures/image3.png  used on input line 127.
 (pdftex.def)             Requested size: 212.34094pt x 48.18742pt.
-<figures/image4.png, id=61, 1308.8097pt x 297.0297pt>
+<figures/image4.png, id=71, 1308.8097pt x 297.0297pt>
 File: figures/image4.png Graphic file (type png)
 <use figures/image4.png>
-Package pdftex.def Info: figures/image4.png  used on input line 114.
+Package pdftex.def Info: figures/image4.png  used on input line 127.
 (pdftex.def)             Requested size: 212.34094pt x 48.18742pt.
+ [6
 
-[5
-
- <./figures/image3.png> <./figures/image4.png>] [6
+ <./figures/image3.png> <./figures/image4.png>] [7
 
 ]
 \tf@nav=\write6
@@ -896,10 +904,10 @@ Package rerunfilecheck Info: File `project_background.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 21234 strings out of 476106
- 409119 string characters out of 5793933
+ 21247 strings out of 476106
+ 409457 string characters out of 5793933
  1936975 words of memory out of 5000000
- 42815 multiletter control sequences out of 15000+600000
+ 42825 multiletter control sequences out of 15000+600000
  560474 words of font info for 44 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  101i,15n,107p,410b,657s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -907,10 +915,10 @@ Here is how much of TeX's memory you used:
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
-Output written on project_background.pdf (6 pages, 475554 bytes).
+Output written on project_background.pdf (7 pages, 487981 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
- 17 named destinations out of 1000 (max. 500000)
- 69 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 114 PDF objects out of 1000 (max. 8388607)
+ 71 compressed objects within 1 object stream
+ 20 named destinations out of 1000 (max. 500000)
+ 74 words of extra memory for PDF output out of 10000 (max. 10000000)
 
